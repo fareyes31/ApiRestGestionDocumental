@@ -31,6 +31,7 @@ Route::group([
     Route::post('me', 'App\Http\Controllers\AuthController@me');
     Route::post('register', 'App\Http\Controllers\AuthController@register');
 
+    Route::post('getusuarios', 'App\Http\Controllers\AuthController@obtenerusuarios');
 });
 
 // Route::group(['middleware' => ['cors']], function () {
