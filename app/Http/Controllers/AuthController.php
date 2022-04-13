@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
+use JWTAuth;
+
 
 class AuthController extends Controller
 {
@@ -97,10 +99,10 @@ class AuthController extends Controller
         if ( $validator ->fails()) {
 
             return response()->json(
-                // $validator->errors()->toJson(),400);
-            [
-                'error'=>'¡Usuario ya se encuentra Registrado!',
-            ],400);
+                $validator->errors()->toJson(),400);
+            // [
+            //     'error'=>'¡Usuario ya se encuentra Registrado!',
+            // ],400);
         }
 
         $user = User::create(array_merge(
@@ -116,9 +118,11 @@ class AuthController extends Controller
 
     public function obtenerusuarios()
     {
-        dd('aca');
-        $usuarios = User::all();
-        dd($usuarios);
+       $users= User::all();
+       return response()->json([
+           'message'=>'¡Consulta Exitosa!',
+           'users'=>$users
+       ]);
     }
 
 }
