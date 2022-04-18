@@ -31,6 +31,7 @@ Route::group([
     Route::post('me',          'App\Http\Controllers\AuthController@me');
     Route::post('register',    'App\Http\Controllers\AuthController@register');
     Route::get('obtenerusuarios',  'App\Http\Controllers\AuthController@obtenerusuarios');
+    Route::get('searchuser',  'App\Http\Controllers\AuthController@searchuser');
 });
 
 

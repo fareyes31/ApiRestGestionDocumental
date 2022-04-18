@@ -125,4 +125,19 @@ class AuthController extends Controller
        ]);
     }
 
+    public function searchuser(Request $request){
+        $id=$request->id;
+        if($id == ""){
+            return response()->json(['error' => 'Debes enviar un identificador de usuario'], 403);
+        }
+        $user = User::find($id);
+        if($user == null){
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }else{
+            return response()->json([
+                'message'=>'¡Consulta Exitosa!',
+                'users'=>$user
+            ],200);
+        }
+    }
 }
