@@ -30,7 +30,7 @@ Route::group([
     Route::post('refresh',     'App\Http\Controllers\AuthController@refresh');
     Route::post('me',          'App\Http\Controllers\AuthController@me');
     Route::post('register',    'App\Http\Controllers\AuthController@register');
-    Route::post('obtenerusuarios',  'App\Http\Controllers\AuthController@obtenerusuarios');
+    Route::get('obtenerusuarios',  'App\Http\Controllers\AuthController@obtenerusuarios');
 });
 
 
