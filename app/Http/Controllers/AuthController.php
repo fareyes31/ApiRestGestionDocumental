@@ -84,7 +84,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 2
         ]);
     }
 
@@ -139,5 +139,11 @@ class AuthController extends Controller
                 'users'=>$user
             ],200);
         }
+    }
+
+    public function validartoken(){
+        return response()->json([
+            'message'=>'¡Consulta Exitosa!',
+        ],200);
     }
 }
