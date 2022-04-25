@@ -99,7 +99,7 @@ class AuthController extends Controller
         if ( $validator ->fails()) {
 
             return response()->json(
-                $validator->errors()->toJson(),400);
+                $validator->errors(),400);
             // [
             //     'error'=>'¡Usuario ya se encuentra Registrado!',
             // ],400);
