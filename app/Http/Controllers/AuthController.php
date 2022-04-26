@@ -131,6 +131,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Debes enviar un identificador de usuario'], 403);
         }
         $user = User::find($id);
+        dd($user);
         if($user == null){
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }else{
