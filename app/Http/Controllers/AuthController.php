@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Contracts\Encryption\DecryptException;
+// use Illuminate\Encryption\Cr;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -131,7 +134,14 @@ class AuthController extends Controller
             return response()->json(['error' => 'Debes enviar un identificador de usuario'], 403);
         }
         $user = User::find($id);
-        dd($user);
+
+        $decrypt= $user->password; 
+
+
+
+        dd($decrypt);
+
+
         if($user == null){
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }else{
