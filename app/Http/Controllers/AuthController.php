@@ -168,7 +168,7 @@ class AuthController extends Controller
                 $user->name = $request->name;
                 $user->email = $request->email;
                 if($request->password && $request->password != "" ){
-                    $user->password = $request->password;
+                    $user->password =  bcrypt($request->password);
                 }
                 $user->save();
 
