@@ -161,11 +161,16 @@ class AuthController extends Controller
                     'email'=>'required|string|email|max:100|unique:users',
                     'password'=>'string|min:6',
                 ]);
-                if($request->password && $request->password != "" ){
-                    $user->password =  bcrypt($request->password);
-                }elseif($validator ->fails()){
+                if($request->password && $request->password == "" ){
+                    // $user->password =  bcrypt($request->password);
+                }elseif($request->password && $request->password != "" && $validator->fails()){
                     return response()->json(
                     $validator->errors(),400);
+                }elseif($validator->fails()){
+                    return response()->json(
+                    $validator->errors(),400);
+                }else{
+                    $user->password =  bcrypt($request->password);
                 }
                     $user->name = $request->name;
                     $user->email = $request->email;
@@ -181,11 +186,16 @@ class AuthController extends Controller
                     'email'=>'required|string|email|max:100',
                     'password'=>'string|min:6',
                 ]);
-                if($request->password && $request->password != "" ){
-                    $user->password =  bcrypt($request->password);
+                if($request->password && $request->password == "" ){
+                    // $user->password =  bcrypt($request->password);
+                }elseif($request->password && $request->password != "" && $validator->fails()){
+                    return response()->json(
+                    $validator->errors(),400);
                 }elseif($validator->fails()){
                     return response()->json(
                     $validator->errors(),400);
+                }else{
+                    $user->password =  bcrypt($request->password);
                 }
                     $user->name = $request->name;
                     $user->email = $request->email;
