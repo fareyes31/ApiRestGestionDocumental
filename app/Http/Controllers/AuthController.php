@@ -156,18 +156,16 @@ class AuthController extends Controller
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }else{
 
-            $validator = validator::make($request->all(),[
-                'name'=>'required',
-                'email'=>'required|string|email|max:100|unique:users',
-                'password'=>'string|min:6',
-            ]);
-            if ( $validator ->fails() && $user->email != $request->email) {
-                return response()->json(
-                $validator->errors(),400);
-            }elseif($validator ->fails() && $user->email == $request->email ){
-                return response()->json(
-                $validator->errors(),400);
-            }else{
+            if ($user->email != $request->email) {
+                $validator = validator::make($request->all(),[
+                    'name'=>'required',
+                    'email'=>'required|string|email|max:100|unique:users',
+                    'password'=>'string|min:6',
+                ]);
+                if($validator ->fails()){
+                    return response()->json(
+                    $validator->errors(),400);
+                }else{
                 $user->name = $request->name;
                 $user->email = $request->email;
                 if($request->password && $request->password != "" ){
@@ -178,7 +176,30 @@ class AuthController extends Controller
 
                 return response()->json([
                     'message'=>'¡Datos Almacenados!'
+                ],200);  
+                }
+            }elseif( $user->email == $request->email ){
+                $validator = validator::make($request->all(),[
+                    'name'=>'required',
+                    'email'=>'required|string|email|max:100',
+                    'password'=>'string|min:6',
+                ]);
+                if($validator->fails()){
+                    return response()->json(
+                    $validator->errors(),400);
+                }else{
+                    $user->name = $request->name;
+                $user->email = $request->email;
+                if($request->password && $request->password != "" ){
+                    $user->password =  bcrypt($request->password);
+                }
+                $user->save();
+
+
+                return response()->json([
+                    'message'=>'¡Datos Almacenados!'
                 ],200);   
+                }
             }
         }
     }
