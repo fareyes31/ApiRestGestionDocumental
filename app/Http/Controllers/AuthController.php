@@ -161,8 +161,7 @@ class AuthController extends Controller
                 'email'=>'required|string|email|max:100|unique:users',
                 'password'=>'string|min:6',
             ]);
-    
-            if ( $validator ->fails()) {
+            if ( $validator ->fails() && $user->email != $request->email) {
                 return response()->json(
                 $validator->errors(),400);
             }else{
