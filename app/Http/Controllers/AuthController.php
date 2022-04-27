@@ -146,4 +146,39 @@ class AuthController extends Controller
             'message'=>'¡Consulta Exitosa!',
         ],200);
     }
+
+    public function edituser(Request $request){
+        $id=$request->id;
+        if($id == ""){
+            return response()->json(['error' => 'Debes enviar un identificador de usuario'], 403);
+        }
+        $user = User::find($id);
+        if($user == null){
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }else{
+
+            $validator = validator::make($request->all(),[
+                'name'=>'required',
+                'email'=>'required|string|email|max:100|unique:users',
+                'password'=>'string|min:6',
+            ]);
+    
+            if ( $validator ->fails()) {
+                return response()->json(
+                $validator->errors(),400);
+            }else{
+                $user->name = $request->name;
+                $user->email = $request->email;
+                if($request->password){
+                    $user->password = $request->password;
+                }
+                $user->save();
+
+
+                return response()->json([
+                    'message'=>'¡Datos Almacenados!'
+                ],200);   
+            }
+        }
+    }
 }
