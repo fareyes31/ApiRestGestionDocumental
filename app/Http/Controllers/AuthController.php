@@ -169,7 +169,7 @@ class AuthController extends Controller
             }else{
                 $user->name = $request->name;
                 $user->email = $request->email;
-                if($request->password){
+                if($request->password && $request->password != "" ){
                     $user->password = $request->password;
                 }
                 $user->save();
