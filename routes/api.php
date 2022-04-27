@@ -33,7 +33,7 @@ Route::group([
     Route::get('obtenerusuarios',  'App\Http\Controllers\AuthController@obtenerusuarios');
     Route::get('searchuser',  'App\Http\Controllers\AuthController@searchuser');
     Route::get('validartoken',     'App\Http\Controllers\AuthController@validartoken');
-    Route::get('edituser',     'App\Http\Controllers\AuthController@edituser');
+    Route::post('edituser',     'App\Http\Controllers\AuthController@edituser');
 });
 
 
