@@ -148,11 +148,10 @@ class AuthController extends Controller
     }
 
     public function edituser(Request $request){
-        $id=$request->id;
-        if($id == ""){
+        if($request->id == ""){
             return response()->json(['error' => 'Debes enviar un identificador de usuario'], 403);
         }
-        $user = User::find($id);
+        $user = User::find($request->id);
         if($user == null){
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }else{
