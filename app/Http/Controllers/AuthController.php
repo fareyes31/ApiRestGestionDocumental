@@ -157,8 +157,8 @@ class AuthController extends Controller
         }else{
             if ($user->email != $request->email) {
                 $validator = validator::make($request->all(),[
-                    'name'=>'required',
-                    'email'=>'required|string|email|max:100|unique:users',
+                    // 'name'=>'required',
+                    'email'=>'string|email|max:100|unique:users',
                     'password'=>'string|min:6',
                 ]);
                 if($validator ->fails()){
@@ -173,12 +173,12 @@ class AuthController extends Controller
                     $user->save();
                     return response()->json([
                         'message'=>'¡Datos Almacenados!'
-                    ],200);  
+                    ],200);
                 }
             }elseif( $user->email == $request->email ){
                 $validator = validator::make($request->all(),[
-                    'name'=>'required',
-                    'email'=>'required|string|email|max:100',
+                    // 'name'=>'required',
+                    'email'=>'string|email|max:100',
                     'password'=>'string|min:6',
                 ]);
                 if($validator->fails()){
@@ -193,7 +193,7 @@ class AuthController extends Controller
                     $user->save();
                     return response()->json([
                         'message'=>'¡Datos Almacenados!'
-                    ],200);   
+                    ],200);
                 }
             }
         }
